@@ -55,4 +55,9 @@ export MAGICK_CONFIGURE_PATH="/app/.magick"
 EOF
 
 # fix https://github.com/Zulko/moviepy/issues/693
-sed -i '/<policy domain="path" rights="none" pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
+# https://help.heroku.com/RFDJQSG3/how-can-i-override-imagemagick-settings-in-a-policy-xml-file
+# set MAGICK_CONFIGURE_PATH in env vars
+MAGICK_DIR=/app/.magick
+mkdir $MAGICK_DIR
+cp /etc/ImageMagick-6/policy.xml $MAGICK_DIR
+sed -i '/<policy domain="path" rights="none" pattern="@\*"/d' $MAGICK_DIR/policy.xml
