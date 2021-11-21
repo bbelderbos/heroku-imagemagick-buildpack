@@ -53,3 +53,6 @@ export CPPPATH="\$CPPPATH:${CPPPATH//$BUILD_DIR//app}"
 export CPATH="\$CPATH:${CPATH//$BUILD_DIR//app}"
 export MAGICK_CONFIGURE_PATH="/app/.magick"
 EOF
+
+# fix https://github.com/Zulko/moviepy/issues/693
+sed -i '/<policy domain="path" rights="none" pattern="@\*"/d' /etc/ImageMagick-6/policy.xml
